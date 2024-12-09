@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-
+import ProductService from "../../services/ProductService";
 interface Product {
   id: number;
   title: string;
@@ -8,10 +8,7 @@ interface Product {
 const Product = () => {
   const { isPending, isError, data, error } = useQuery({
     queryKey: ["products"],
-    queryFn: () =>
-      fetch("https://jsonplaceholder.typicode.com/posts").then((res) =>
-        res.json()
-      ),
+    queryFn: ProductService.getProducts,
     // staleTime: 5000,
     // gcTime: 60000,
     // enabled: true,
