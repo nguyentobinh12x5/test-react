@@ -33,7 +33,7 @@ const ProductService = {
   },
 
   deleteProduct: async (id: number) => {
-    const response = await fetch(`https://fakestoreapi.com/products/${id}`, {
+    const response = await fetch(`${BASE_URL}/posts/${id}`, {
       method: "DELETE",
     });
     return response.json();
