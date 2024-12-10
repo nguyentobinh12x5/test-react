@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { getPosts } from "../../services/PostService";
 import { useNavigate } from "react-router-dom";
-import { Post } from "../../types/post";
 import "./PostList.css";
+import { getPosts } from "../../../services/PostService";
+import { Post } from "../../../types/post";
 
 const PostList = () => {
   const navigate = useNavigate();

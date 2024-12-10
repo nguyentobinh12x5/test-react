@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createPost } from "../../services/PostService";
-import { Post } from "../../types/post";
+import { Post } from "../../../types/post";
+import { createNewPost } from "../../../services/PostService";
 
 const CreatePost = () => {
   const [title, setTitle] = useState<string>("");
@@ -9,7 +9,7 @@ const CreatePost = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: (newPost: Post) => createPost(newPost),
+    mutationFn: (newPost: Post) => createNewPost(newPost),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: "Posts" });
       setContent("");

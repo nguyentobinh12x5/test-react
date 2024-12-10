@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { getPost } from "../../services/PostService";
 import { useParams } from "react-router-dom";
+import { getPost } from "../../../services/PostService";
 
 const PostDetail = () => {
   const { id } = useParams();
