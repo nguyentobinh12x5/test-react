@@ -7,18 +7,18 @@ import {
   IEditPostCommand,
 } from "../interfaces/post";
 
-export async function getPostsRequest(): Promise<AxiosResponse<IPost[]>> {
+export function getPostsRequest(): Promise<AxiosResponse<IPost[]>> {
   return RequestService.axios.get<IPost[]>(`${ENDPOINTS.POSTS}`);
 }
 
-export function getPostByIdRequest(id: number): Promise<AxiosResponse<IPost>> {
-  return RequestService.axios.get(`${ENDPOINTS.POSTS}/${id}`);
+export function getPostByIdRequest(id: string): Promise<AxiosResponse<IPost>> {
+  return RequestService.axios.get<IPost>(`${ENDPOINTS.POSTS}/${id}`);
 }
 
-export async function createNewPostRequest(
+export function createNewPostRequest(
   command: ICreatePostCommand
-): Promise<AxiosResponse<number>> {
-  return RequestService.axios.post<number>(`$${ENDPOINTS.POSTS}`, command);
+): Promise<AxiosResponse<IPost>> {
+  return RequestService.axios.post<IPost>(`${ENDPOINTS.POSTS}`, command);
 }
 
 export function editNewPostRequest(
@@ -27,6 +27,6 @@ export function editNewPostRequest(
   return RequestService.axios.put<number>(`$${ENDPOINTS.POSTS}`, command);
 }
 
-export function deleteByIdRequest(id: number): Promise<AxiosResponse<IPost>> {
+export function deleteByIdRequest(id: number): Promise<AxiosResponse<number>> {
   return RequestService.axios.delete(`${ENDPOINTS.POSTS}/${id}`);
 }

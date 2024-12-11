@@ -1,25 +1,15 @@
 import { useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createNewPostRequest } from "../services/request";
-import { ICreatePostCommand } from "../interfaces/post";
+import { handleCreatePosts } from "../services/handle";
 
 const CreatePost = () => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
-  const queryClient = useQueryClient();
 
-  const mutation = useMutation({
-    mutationFn: (newPost: ICreatePostCommand) => createNewPostRequest(newPost),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: "Posts" });
-      setContent("");
-      setTitle("");
-    },
-  });
+  const mutation = handleCreatePosts();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    mutation.mutate({ title, body: content, userId: 0 });
+    mutation.mutate({ title, body: content, id: 0, userId: 0 });
   };
 
   return (
@@ -47,7 +37,7 @@ const CreatePost = () => {
       </form>
       {mutation.isPending && <p>Creating post...</p>}
       {mutation.isError && <p>Error creating post: {mutation.error.message}</p>}
-      {mutation.isSuccess && <p>Post created successfully!</p>}
+      {mutation.isSuccess && <p>Post created successfully</p>}
     </div>
   );
 };

@@ -1,37 +1,26 @@
-import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import "./PostList.css";
-import { getPostsRequest } from "../services/request";
-import { IPost } from "../interfaces/post";
 import React from "react";
-import { AxiosResponse } from "axios";
+import { handleGetPosts } from "../services/handle";
+import { CREATE_POST_PATH } from "../constants/create-post";
 
 const PostList: React.FC = () => {
   const navigate = useNavigate();
-  const { data, isPending, isError, error } = useQuery<
-    AxiosResponse<IPost[]>,
-    Error
-  >({
-    queryKey: ["Posts"],
-    queryFn: getPostsRequest,
-    // staleTime: 5000,
-    // gcTime: 60000,
-    // enabled: true,
-  });
+  const { data: posts, isPending, isError, error } = handleGetPosts();
   if (isPending) return <div>Loading...</div>;
-  if (isError) return <div>Error: {error.message}</div>;
-
+  if (isError) return <div>Error: {error?.message}</div>;
+  const hanleCreatePost = () => {
+    navigate(`${CREATE_POST_PATH}`);
+  };
   return (
     <div>
       <h2>Post</h2>
-      <button onClick={() => navigate("/posts/create")}>Create Post</button>
+      <button onClick={hanleCreatePost}>Create Post</button>
       <div className="post-list">
-        {data.map((post) => (
+        {posts?.map((post) => (
           <div key={post.id} className="post-card">
             <h3>{post.title}</h3>
-            <button onClick={() => navigate(`/posts/${post.id}`)}>
-              Read more
-            </button>
+            <button onClick={() => navigate(`${post.id}`)}>Read more</button>
           </div>
         ))}
       </div>

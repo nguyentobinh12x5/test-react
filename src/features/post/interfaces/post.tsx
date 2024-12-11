@@ -6,6 +6,7 @@ export interface IPost {
 }
 
 export interface ICreatePostCommand {
+  id: number;
   title: string;
   body: string;
   userId: number;

@@ -1,7 +1,7 @@
 import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 
-const PostList = lazy(() => import("./list/PostList"));
+const PostList = lazy(() => import("./list"));
 const PostDetail = lazy(() => import("./detail"));
 const CreatePost = lazy(() => import("./create"));
 const Posts = () => {
