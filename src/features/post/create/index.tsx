@@ -4,20 +4,12 @@ import { handleCreatePosts } from "../services/handle";
 const CreatePost = () => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
-  const queryClient = useQueryClient();
 
-  const mutation = useMutation({
-    mutationFn: (newPost: ICreatePostCommand) => createNewPostRequest(newPost),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: "Posts" });
-      setContent("");
-      setTitle("");
-    },
-  });
+  const mutation = handleCreatePosts();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    mutation.mutate({ title, body: content, userId: 0 });
+    mutation.mutate({ title, body: content, id: 0, userId: 0 });
   };
 
   return (
