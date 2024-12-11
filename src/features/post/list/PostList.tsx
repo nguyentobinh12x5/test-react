@@ -1,14 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import "./PostList.css";
-import { getPosts } from "../../../services/PostService";
-import { Post } from "../../../types/post";
+import { getPostsRequest } from "../services/request";
+import { IPost } from "../interfaces/post";
+import React from "react";
+import { AxiosResponse } from "axios";
 
-const PostList = () => {
+const PostList: React.FC = () => {
   const navigate = useNavigate();
-  const { isPending, isError, data, error } = useQuery<Post[]>({
+  const { data, isPending, isError, error } = useQuery<
+    AxiosResponse<IPost[]>,
+    Error
+  >({
     queryKey: ["Posts"],
-    queryFn: getPosts,
+    queryFn: getPostsRequest,
     // staleTime: 5000,
     // gcTime: 60000,
     // enabled: true,
@@ -21,10 +26,10 @@ const PostList = () => {
       <h2>Post</h2>
       <button onClick={() => navigate("/posts/create")}>Create Post</button>
       <div className="post-list">
-        {data.map((Post) => (
-          <div key={Post.id} className="post-card">
-            <h3>{Post.title}</h3>
-            <button onClick={() => navigate(`/posts/${Post.id}`)}>
+        {data.map((post) => (
+          <div key={post.id} className="post-card">
+            <h3>{post.title}</h3>
+            <button onClick={() => navigate(`/posts/${post.id}`)}>
               Read more
             </button>
           </div>
