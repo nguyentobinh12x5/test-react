@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Post } from "../../../types/post";
-import { createNewPost } from "../../../services/PostService";
+import { createNewPostRequest } from "../services/request";
+import { ICreatePostCommand } from "../interfaces/post";
 
 const CreatePost = () => {
   const [title, setTitle] = useState<string>("");
@@ -9,7 +9,7 @@ const CreatePost = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: (newPost: Post) => createNewPost(newPost),
+    mutationFn: (newPost: ICreatePostCommand) => createNewPostRequest(newPost),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: "Posts" });
       setContent("");
@@ -19,7 +19,7 @@ const CreatePost = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    mutation.mutate({ title, body: content, id: 0, userId: 0 });
+    mutation.mutate({ title, body: content, userId: 0 });
   };
 
   return (
