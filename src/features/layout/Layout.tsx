@@ -6,11 +6,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const Layout: React.FC<Props> = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+const Layout: React.FC<Props> = ({ children }) => {
   return (
     <SidebarProvider>
       <AppSidebar />
