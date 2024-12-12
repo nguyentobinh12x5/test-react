@@ -36,7 +36,7 @@ const CreatePostForm = () => {
               <ErrorMessage
                 name="title"
                 component="div"
-                className=" text-red-500"
+                className=" text-danger"
               />
             </div>
             <div>
@@ -45,7 +45,7 @@ const CreatePostForm = () => {
               <ErrorMessage
                 name="content"
                 component="div"
-                className=" text-red-500"
+                className=" text-danger"
               />
             </div>
             <Button type="submit" disabled={isSubmitting}>
