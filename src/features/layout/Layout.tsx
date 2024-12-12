@@ -1,6 +1,6 @@
-import Footer from "./footer/Footer";
-import Navbar from "./navbar/Navbar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import React from "react";
+import { AppSidebar } from "@/components/ui/app-sidebar";
 
 interface Props {
   children: React.ReactNode;
@@ -8,13 +8,13 @@ interface Props {
 
 const Layout: React.FC<Props> = ({ children }) => {
   return (
-    <div className="layout">
-      <header className="header">
-        <Navbar />
-      </header>
-      <main className="main-content">{children}</main>
-      <Footer />
-    </div>
+    <SidebarProvider>
+      <AppSidebar />
+      <main>
+        <SidebarTrigger />
+        {children}
+      </main>
+    </SidebarProvider>
   );
 };
 
