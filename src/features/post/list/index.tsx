@@ -3,6 +3,7 @@ import "./PostList.css";
 import React from "react";
 import { handleGetPosts } from "../services/handle";
 import { CREATE_POST_PATH } from "../constants/create-post";
+import { Button } from "@/components/ui/button";
 
 const PostList: React.FC = () => {
   const navigate = useNavigate();
@@ -14,12 +15,12 @@ const PostList: React.FC = () => {
   };
   return (
     <div>
-      <button onClick={hanleCreatePost}>Create Post</button>
+      <Button onClick={hanleCreatePost}>Create Post</Button>
       <div className="post-list">
         {posts?.map((post) => (
           <div key={post.id} className="post-card">
             <h3>{post.title}</h3>
-            <button onClick={() => navigate(`${post.id}`)}>Read more</button>
+            <Button onClick={() => navigate(`${post.id}`)}>Read more</Button>
           </div>
         ))}
       </div>

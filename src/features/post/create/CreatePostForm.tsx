@@ -1,6 +1,9 @@
 import { handleCreatePosts } from "../services/handle";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { CreatePostScheme, ICreatePostForm } from "./create-post-scheme";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 
 const CreatePostForm = () => {
   const initialValues: ICreatePostForm = {
@@ -29,17 +32,25 @@ const CreatePostForm = () => {
           <Form>
             <div>
               <label htmlFor="title">Title:</label>
-              <Field type="text" id="title" name="title" />
-              <ErrorMessage name="title" component="div" />
+              <Field as={Input} type="text" id="title" name="title" />
+              <ErrorMessage
+                name="title"
+                component="div"
+                className=" text-red-500"
+              />
             </div>
             <div>
               <label htmlFor="content">Content:</label>
-              <Field as="textarea" id="content" name="content" />
-              <ErrorMessage name="content" component="div" />
+              <Field as={Textarea} id="content" name="content" />
+              <ErrorMessage
+                name="content"
+                component="div"
+                className=" text-red-500"
+              />
             </div>
-            <button type="submit" disabled={isSubmitting}>
+            <Button type="submit" disabled={isSubmitting}>
               Create Post
-            </button>
+            </Button>
           </Form>
         )}
       </Formik>
