@@ -1,9 +1,0 @@
-.navbar-links {
-  display: flex;
-  align-items: center;
-  list-style: none;
-}
-
-.navbar-links a {
-  padding-left: 20px;
-}
