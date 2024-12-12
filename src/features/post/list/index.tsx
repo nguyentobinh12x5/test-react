@@ -14,7 +14,6 @@ const PostList: React.FC = () => {
   };
   return (
     <div>
-      <h2>Post</h2>
       <button onClick={hanleCreatePost}>Create Post</button>
       <div className="post-list">
         {posts?.map((post) => (
